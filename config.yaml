@@ -1,0 +1,9 @@
+preprocessing:
+  input_data: ./train.csv/train.csv
+  test_data: ./test.csv/test.csv
+  input_text: comment_text
+  test_id: id
+training:
+  model: naivebayes
+predict:
+  output_path: ./data/submission.csv
