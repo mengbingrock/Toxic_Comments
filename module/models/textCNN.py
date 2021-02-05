@@ -39,7 +39,7 @@ class TextCNN:
         model.add(Dropout(self.config['dropout']))
         model.add(Dense(self.n_of_classes, activation=None))
         model.add(Dense(self.n_of_classes, activation='sigmoid'))
-        model.compile(optimizer='sgd', loss='binary_crossentropy', metrics=['accuracy'])
+        model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
         model.summary()
 
         return model

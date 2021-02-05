@@ -29,7 +29,7 @@ if __name__ == "__main__":
             vocab_size = np.amax(train_x) + 1
             trainer = Trainer(config['training'], classes, logger, vocab_size)
             model, accuracy, cls_report, history = trainer.fit_and_validate(train_x, train_y, validate_x, validate_y)
-           # model = trainer.fit(train_data, train_labels)
+            # model = trainer.fit(train_data, train_labels)
             logger.info("Accuracy : {}".format(accuracy))
             logger.info("\n{}\n".format(cls_report))
 

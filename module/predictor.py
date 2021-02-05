@@ -16,7 +16,7 @@ class Predictor:
     def save_to_csv(self, id, probs):
         header = ['id', 'toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
         self.logger.info("Saving prediction result to a csv file...")
-        with open(self.config['output_path'], 'w') as output_file:
+        with open(self.config['output_path'], 'w', newline='') as output_file:
             writer = csv.writer(output_file)
             writer.writerow(header)
             for ids, prob in zip(id, probs.tolist()):
