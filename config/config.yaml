@@ -1,0 +1,19 @@
+preprocessing:
+  input_data_path: ./data/train.csv
+  test_data_path: ./data/test.csv
+  input_text: comment_text
+  split_ratio: 0.2
+  random_state: 0
+  test_id: id
+  max_len: 128
+  text_converter: neural_network_vecterization
+training:
+  model_name: text_cnn
+  batch_size: 32
+  dropout: 0.5
+  embedding_col: 128
+  max_len: 128
+  optimizer: sgd
+  epochs: 1
+predict:
+  output_path: ./data/submission_textcnn.csv
