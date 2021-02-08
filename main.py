@@ -5,10 +5,12 @@ from module.preprocessor import Preprocessor
 from module.trainer import Trainer
 from module.predictor import Predictor
 import numpy as np
+import os
 
 
 if __name__ == "__main__":
 
+    os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
     parser = argparse.ArgumentParser(description='Processing command line')
     parser.add_argument('--config', type=str, required=True)
     parser.add_argument('--loglevel', type=str, default="INFO")
