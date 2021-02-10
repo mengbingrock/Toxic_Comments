@@ -24,8 +24,8 @@ class Trainer:
         return self.model
 
     def metrics(self, predictions, labels):
-        accuracy = accuracy_score(predictions, labels)
-        cls_report = classification_report(predictions, labels, zero_division=1)
+        accuracy = accuracy_score(labels, predictions)
+        cls_report = classification_report(labels, predictions, zero_division=1)
         return accuracy, cls_report
 
     def validate(self, validate_x, validate_y):

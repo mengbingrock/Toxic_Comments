@@ -1,6 +1,7 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, Conv1D, Dense, Dropout, Flatten, MaxPooling1D
 
+
 class TextCNN:
     def __init__(self, config, classes, vocab_size, logger):
         self.models = {}
@@ -19,6 +20,7 @@ class TextCNN:
         self.logger.info("---batch_size = {}".format(self.config['batch_size']))
         self.logger.info("---dropout = {}".format(self.config['dropout']))
         self.logger.info("---epochs = {}".format(self.config['epochs']))
+        self.logger.info("---num_of_classes = {}".format(self.n_of_classes))
 
     def _build(self):
         self._show_training_config_para()

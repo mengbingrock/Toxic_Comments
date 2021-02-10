@@ -4,11 +4,13 @@ import logging
 from module.preprocessor import Preprocessor
 from module.trainer import Trainer
 from module.predictor import Predictor
-import numpy as np
+import os
 
 
 if __name__ == "__main__":
 
+    # new changes
+    os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
     parser = argparse.ArgumentParser(description='Processing command line')
     parser.add_argument('--config', type=str, required=True)
     parser.add_argument('--loglevel', type=str, default="INFO")
@@ -26,10 +28,9 @@ if __name__ == "__main__":
             preprocessor = Preprocessor(config['preprocessing'], classes, logger)
             train_data, train_labels, train_x, validate_x, train_y, validate_y, test_data = preprocessor.process()
 
-            vocab_size = np.amax(train_x) + 1
+            vocab_size = preprocessor.vocab_size
             trainer = Trainer(config['training'], classes, logger, vocab_size)
             model, accuracy, cls_report, history = trainer.fit_and_validate(train_x, train_y, validate_x, validate_y)
-            # model = trainer.fit(train_data, train_labels)
             logger.info("Accuracy : {}".format(accuracy))
             logger.info("\n{}\n".format(cls_report))
 

@@ -1,11 +1,12 @@
-import nltk
+import re
+import string
 
 
 def remove_punctuation(orig_data):
     data_copy = orig_data.copy()
     for index in orig_data.index:
-        tokenizer = nltk.RegexpTokenizer(r"\w+")
-        line = orig_data[index].strip().lower()
-        new_words = tokenizer.tokenize(line)
-        data_copy[index] = ' '.join(new_words)
+        line = orig_data[index].strip().lower().replace('\n', '')
+        words = re.split(r'\W+', line)
+        filter_table = str.maketrans('', '', string.punctuation)
+        data_copy[index] = [w.translate(filter_table) for w in words if len(w.translate(filter_table))]
     return data_copy
