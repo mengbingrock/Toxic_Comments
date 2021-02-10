@@ -4,6 +4,10 @@ import logging
 from module.preprocessor import Preprocessor
 from module.trainer import Trainer
 from module.predictor import Predictor
+<<<<<<< HEAD
+=======
+import numpy as np
+>>>>>>> 7edb5a9525e461ea4096571fa309dde0b62b6f4a
 import os
 
 
