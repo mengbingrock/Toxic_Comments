@@ -16,6 +16,6 @@ training:
   embedding_col: 100
   max_len: 128
   optimizer: sgd
-  epochs: 1
+  epochs: 2
 predict:
   output_path: ./data/submission_pretrained_embedding.csv
