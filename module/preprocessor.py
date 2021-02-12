@@ -79,6 +79,7 @@ class Preprocessor:
         pretrained_embedding = self.config.get('pretrained_embedding', None)
 
         if pretrained_embedding is not None:
+            self.logger.info("Detected pretrained embedding.")
             self.logger.info("Loading pretrained embeddings {}".format(pretrained_embedding))
             embedding = Preprocessor.load_word_embedding(pretrained_embedding)
             self.logger.info("Loading done")
@@ -155,7 +156,6 @@ class Preprocessor:
     def load_word_embedding(filename):
         file_in = io.open(filename, 'r', encoding='utf-8', newline='\n', errors='ignore')
         data = {}
-
         for line in file_in:
             tokens = line.rstrip().split(' ')
             data[tokens[0]] = np.array(list(map(float, tokens[1:])))

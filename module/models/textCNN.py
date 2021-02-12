@@ -1,15 +1,19 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, Conv1D, Dense, Dropout, Flatten, MaxPooling1D
+import warnings
+warnings.filterwarnings('always')
+warnings.filterwarnings('ignore')
 
 
 class TextCNN:
-    def __init__(self, config, classes, vocab_size, logger):
+    def __init__(self, config, classes, vocab_size, logger, embedding_matrix):
         self.models = {}
         self.logger = logger
         self.vocab_size = vocab_size
         self.config = config
         self.classes = classes
         self.n_of_classes = len(classes)
+        self.pretrained_embedding = embedding_matrix
         self.model = self._build()
 
     def _show_training_config_para(self):
@@ -25,11 +29,21 @@ class TextCNN:
     def _build(self):
         self._show_training_config_para()
         model = Sequential()
-        model.add(Embedding(self.vocab_size,
-                            self.config['embedding_col'],
-                            embeddings_initializer='uniform',
-                            input_length=self.config['max_len'],
-                            trainable=True))
+        if self.pretrained_embedding is not None:
+            self.logger.info("Found embedding matrix, setting trainable=False")
+            model.add(Embedding(self.vocab_size,
+                                self.config['embedding_col'],
+                                weights=[self.pretrained_embedding],
+                                input_length=self.config['max_len'],
+                                trainable=False))
+        else:
+            self.logger.info("Not found embedding matrix, skip using pretrained model, setting trainable=true")
+            model.add(Embedding(self.vocab_size,
+                                self.config['embedding_col'],
+                                embeddings_initializer='uniform',
+                                input_length=self.config['max_len'],
+                                trainable=True))
+
         model.add(Conv1D(128, 7, activation='relu', padding='same'))
         model.add(MaxPooling1D())
         model.add(Conv1D(256, 5, activation='relu', padding='same'))

@@ -18,4 +18,4 @@ training:
   optimizer: sgd
   epochs: 1
 predict:
-  output_path: ./data/submission_textcnn.csv
+  output_path: ./data/submission_pretrained_embedding.csv

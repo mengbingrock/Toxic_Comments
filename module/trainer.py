@@ -4,18 +4,19 @@ from sklearn.metrics import classification_report
 
 
 class Trainer:
-    def __init__(self, config, classes, logger, vocab_size):
+    def __init__(self, config, classes, logger, vocab_size, embedding_matrix):
         self.config = config
         self.classes = classes
         self.logger = logger
         self.vocab_size = vocab_size
         self.model = None
+        self.pretrained_embedding = embedding_matrix
         self._create_model(classes)
 
     def _create_model(self, classes):
         if self.config['model_name'] == 'text_cnn':
             self.logger.info("Creating textCNN model...")
-            self.model = TextCNN(self.config, classes, self.vocab_size, self.logger)
+            self.model = TextCNN(self.config, classes, self.vocab_size, self.logger, self.pretrained_embedding)
         else:
             self.logger.warning("Currently model {} is not be supported".format(self.config['model_name']))
 

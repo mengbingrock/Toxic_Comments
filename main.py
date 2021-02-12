@@ -29,7 +29,8 @@ if __name__ == "__main__":
             train_data, train_labels, train_x, validate_x, train_y, validate_y, test_data = preprocessor.process()
 
             vocab_size = preprocessor.vocab_size
-            trainer = Trainer(config['training'], classes, logger, vocab_size)
+            pretrained_embedding = preprocessor.embedding_matrix
+            trainer = Trainer(config['training'], classes, logger, vocab_size, pretrained_embedding)
             model, accuracy, cls_report, history = trainer.fit_and_validate(train_x, train_y, validate_x, validate_y)
             logger.info("Accuracy : {}".format(accuracy))
             logger.info("\n{}\n".format(cls_report))
