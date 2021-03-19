@@ -1,4 +1,5 @@
 # Toxic_Comments
+Kaggle link: https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge
 
 Download pretrained embedding glove.twitter.27B.zip from https://nlp.stanford.edu/projects/glove/
 
