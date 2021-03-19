@@ -1,0 +1,24 @@
+preprocessing:
+  input_data_path: ./data/train.csv
+  test_data_path: ./data/test.csv
+  input_text: comment_text
+  split_ratio: 0.2
+  random_state: 0
+  test_id: id
+  max_len: 128
+  text_converter: neural_network_vecterization
+  embedding_col: 100
+  pretrained_embedding: ./data/glove.twitter.27B.100d.txt
+training:
+  model_name: bidirectGRU
+  nums_head: 5
+  nums_layer: 1
+  dff: 128
+  batch_size: 32
+  dropout: 0.1
+  embedding_col: 100
+  max_len: 128
+  optimizer: sgd
+  epochs: 10
+predict:
+  output_path: ./data/submission_RNN.csv
